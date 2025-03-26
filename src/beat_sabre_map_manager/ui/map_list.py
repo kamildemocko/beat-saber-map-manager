@@ -12,12 +12,13 @@ class MapList:
         self.bsmaps = bsmaps
         self.selected_map: str | None =  None
 
-        self._build_map_list()
+        self._build_content()
     
     def update_maps(self, bsmaps: list[Path]) -> None:
+        # TODO use
         self.bsmaps = bsmaps
 
-    def _build_map_list(self) -> None:
+    def _build_content(self) -> None:
         self.content = ft.ListView(expand=1)
 
         for bsmap in self.bsmaps:

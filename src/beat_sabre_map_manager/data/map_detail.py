@@ -42,5 +42,9 @@ class MapDetail(BaseModel):
 def get_map_detail(map_path: Path) -> MapDetail:
     info_file_path = map_path.joinpath("info.dat")
     with info_file_path.open("r", encoding="utf-8") as file:
-        return MapDetail.model_validate_json(file.read())
+        parsed = MapDetail.model_validate_json(file.read())
+        parsed.song_filename = map_path.joinpath(parsed.song_filename).as_posix()
+        parsed.cover_image_filename = map_path.joinpath(parsed.cover_image_filename).as_posix()
+
+        return parsed
     
