@@ -1,6 +1,6 @@
 import flet as ft
 
-from beat_sabre_map_manager.ui.map_list import MapList
+from beat_sabre_map_manager.ui.map_list import MapListUI
 from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 from beat_sabre_map_manager.data.maps import Maps
 
@@ -9,7 +9,7 @@ class App:
         maps_handle = Maps()
         maps_handle.load_maps()
         self.map_detail = MapDetailUI()
-        self.map_list: MapList = MapList(maps_handle.maps, self.map_detail)
+        self.map_list: MapListUI = MapListUI(maps_handle.maps, self.map_detail)
 
     def build_ui(self, page: ft.Page) -> None:
         # page.add(ft.Column([
@@ -21,7 +21,6 @@ class App:
         # ]))
 
         page.add(ft.Column([
-            ft.Markdown("# Map name:"),
             ft.Container(
                 content=self.map_list.content,
                 height=400,
