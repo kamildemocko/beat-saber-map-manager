@@ -1,1 +1,1 @@
-# Beat Saber Map Manger
+# Beat Saber Map Manager
