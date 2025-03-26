@@ -9,14 +9,31 @@ class BSPathError(Exception):
 
 class BSPath:
     def __init__(self):
-        self.root: Path
         self.path: Path
     
     def find_game_path(self) -> Path:
-        if self.path is None:
-            ...
+        if self.path is not None:
+            return self.path
+
+        found_paths = []
+
+        steam_root_path = self._get_steam_path()
+        steam_steamapps_paths = self._get_steamapps_path(steam_root_path)
+
+        for path in steam_steamapps_paths:
+            search_folder = path.join(r"steamapps\common\Beat Saber")
+
+            if search_folder.exists():
+                found_paths.append(search_folder)
         
-        return self.path
+        match len(found_paths):
+            case 0: 
+                raise BSPathError("game folder not found")
+            case x if x > 1:
+                raise BSPathError("multiple game folders were found")
+            case _:
+                self.path = found_paths[0].join("Beat Saber_Data").join("CustomLevels")
+                return self.path
         
         
 
