@@ -1,10 +1,13 @@
 import flet as ft
 
 from beat_sabre_map_manager.ui.map_list import MapList
+from beat_sabre_map_manager.data.maps import Maps
 
 class App:
     def __init__(self) -> None:
-        self.map_list: MapList = MapList()
+        maps_handle = Maps()
+        maps_handle.load_maps()
+        self.map_list: MapList = MapList(maps_handle.maps)
 
     def build_ui(self, page: ft.Page) -> None:
         page.add(ft.Column([
