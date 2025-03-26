@@ -10,6 +10,14 @@ class App:
         self.map_list: MapList = MapList(maps_handle.maps)
 
     def build_ui(self, page: ft.Page) -> None:
+        # page.add(ft.Column([
+        #     ft.Container(
+        #         content=ft.Row([ft.Markdown("drop your custom map here to add it to the game")], expand=1, alignment=ft.MainAxisAlignment.CENTER),
+        #         height=100,
+        #     ),
+        #     ft.Divider(thickness=.4, color=ft.Colors.GREY_300),
+        # ]))
+
         page.add(ft.Column([
             ft.Markdown("# Map Name:"),
             ft.Container(
