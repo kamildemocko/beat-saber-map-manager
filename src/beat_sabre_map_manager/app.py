@@ -8,8 +8,8 @@ class App:
     def __init__(self) -> None:
         maps_handle = Maps()
         maps_handle.load_maps()
-        self.map_list: MapList = MapList(maps_handle.maps)
         self.map_detail = MapDetailUI()
+        self.map_list: MapList = MapList(maps_handle.maps, self.map_detail)
 
     def build_ui(self, page: ft.Page) -> None:
         # page.add(ft.Column([

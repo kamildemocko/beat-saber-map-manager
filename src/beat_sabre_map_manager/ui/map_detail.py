@@ -5,13 +5,14 @@ from beat_sabre_map_manager.data.map_detail import MapDetail
 
 class MapDetailUI:
     def __init__(self) -> None:
-        self.content: ft.Container | None = None
+        self.content = ft.Container(
+            content=ft.Column([]),
+            padding=16,
+        )
 
         self._build_default_content()
     
     def build_content(self, detail: MapDetail) -> None:
-        print(detail.cover_image_filename)
-
         col = ft.Column([
             ft.Row([
                 ft.Column([
@@ -32,10 +33,10 @@ class MapDetailUI:
             ])
         ])
 
-        self.content = ft.Container(
-            content=col,
-            padding=16,
-        )
+        self.content.content = col
+
+        if self.content.page:
+            self.content.update()
     
     def _build_default_content(self) -> None:
         empty = MapDetail(

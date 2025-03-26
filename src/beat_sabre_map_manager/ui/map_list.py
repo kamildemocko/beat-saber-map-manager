@@ -4,13 +4,15 @@ from typing import cast
 import flet as ft
 
 from beat_sabre_map_manager.data.maps import BSMap
+from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 
 
 class MapList:
-    def __init__(self, bsmaps: list[BSMap]) -> None:
+    def __init__(self, bsmaps: list[BSMap], detail_handle: MapDetailUI) -> None:
         self.content: ft.ListView | None = None
         self.bsmaps = bsmaps
         self.selected_map: str | None =  None
+        self.detail_handle = detail_handle
 
         self._build_content()
     
@@ -24,7 +26,8 @@ class MapList:
         for bsmap in self.bsmaps:
             self.content.controls.append(ft.ListTile(
                 title=ft.Text(bsmap.name),
-                on_click=self._on_list_tile_click
+                on_click=self._on_list_tile_click,
+                data=bsmap,
             ))
 
     def _on_list_tile_click(self, e: ft.ControlEvent) -> None:
@@ -43,4 +46,8 @@ class MapList:
         cast(ft.Text, e.control.title).weight = ft.FontWeight.BOLD
 
         self.selected_map = cast(ft.Text, e.control.title).value
+
+        map_data = cast(BSMap, e.control.data)
+        self.detail_handle.build_content(map_data.detail)
+
         self.content.update()

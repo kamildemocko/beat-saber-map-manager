@@ -8,7 +8,7 @@ def set_config(page: ft.Page) -> None:
     page.title = "Beat Sabre Map Manager"
     page.window.resizable = False
     page.window.height = 900
-    page.window.width = 600
+    page.window.width = 660
     page.window.center()
 
 def main(page: ft.Page) -> None:
