@@ -7,7 +7,7 @@ from beat_sabre_map_manager.data.maps import BSMap
 from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 
 
-class MapList:
+class MapListUI:
     def __init__(self, bsmaps: list[BSMap], detail_handle: MapDetailUI) -> None:
         self.content: ft.ListView | None = None
         self.bsmaps = bsmaps
