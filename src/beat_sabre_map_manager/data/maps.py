@@ -3,18 +3,21 @@ from dataclasses import dataclass
 import re
 
 from beat_sabre_map_manager.data.bspath import BSPath
+from beat_sabre_map_manager.data.map_detail import get_map_detail, MapDetail
 
 @dataclass
 class BSMap:
     filename: str
     name: str
     path: Path
+    detail: MapDetail
 
 class Maps:
     def __init__(self):
         self.maps: list[BSMap] = []
     
-    def _get_name_if_valid(self, name: str) -> str | None:
+    @staticmethod
+    def _get_name_if_valid(name: str) -> str | None:
         match = re.search(r"^\w{4}\s{1}\((.*)\)$", name)
         return None if match is None else match.group(1)
     
@@ -27,13 +30,17 @@ class Maps:
             name = self._get_name_if_valid(mapdir.name)
             if name is None:
                 continue
-                
-            print(mapdir)
+
+            try:
+                detail = get_map_detail(mapdir)
+            except Exception:
+                continue
 
             self.maps.append(
                 BSMap(
                     filename=mapdir.name, 
                     name=name,
                     path=mapdir,
+                    detail=detail
                 )
             )

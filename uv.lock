@@ -44,12 +44,14 @@ source = { editable = "." }
 dependencies = [
     { name = "flet", extra = ["all"] },
     { name = "loguru" },
+    { name = "pydantic" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "flet", extras = ["all"], specifier = ">=0.27.6" },
     { name = "loguru", specifier = ">=0.7.3" },
+    { name = "pydantic" },
 ]
 
 [[package]]
