@@ -31,7 +31,16 @@ class MapListUI:
             ))
 
     def _on_list_tile_click(self, e: ft.ControlEvent) -> None:
+        """handle click event on a list tile in the map list, updates visual state of tiles and trings detail view
+        Args:
+            e (ft.ControlEvent): The click event containing the control that was clicked.
+        """
+
         if self.content is None:
+            return
+        
+        if self.selected_map == cast(ft.Text, e.control.title).value:
+            # same map as selected
             return
         
         for item in self.content.controls:
