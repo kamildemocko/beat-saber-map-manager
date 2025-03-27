@@ -44,13 +44,13 @@ class MapDetailUI:
                     for d in detail.difficulties]
                 ])
             ]),
-            ft.Column([
-                ft.Row([
-                    ft.FilledButton("Remove this map", bgcolor=ft.Colors.RED ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="delete", style=ft.ButtonStyle(
-                            padding=ft.padding.all(16)
-                        )),
-                ], alignment=ft.MainAxisAlignment.CENTER)
-            ], alignment=ft.MainAxisAlignment.END, expand=1),
+            # ft.Column([
+            #     ft.Row([
+            #         ft.FilledButton("Remove this map", bgcolor=ft.Colors.RED ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="delete", style=ft.ButtonStyle(
+            #                 padding=ft.padding.all(16)
+            #             )),
+            #     ], alignment=ft.MainAxisAlignment.CENTER)
+            # ], alignment=ft.MainAxisAlignment.END, expand=1),
         ])
 
         self.content.content = col

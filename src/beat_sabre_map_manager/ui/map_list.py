@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import cast
 
 import flet as ft
