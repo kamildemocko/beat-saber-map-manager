@@ -31,7 +31,7 @@ class MapDetailUI:
                     ft.TextField(label="BPM", read_only=True, value=f"{detail.beats_per_minute:.1f}"),
                     ft.OutlinedButton(text="Open audio file", on_click=lambda _: open_audio_file(detail.song_filename)),
                 ]),
-            ], alignment=ft.MainAxisAlignment.START, expand=1),
+            ]),
             ft.Row([
                 *[ft.ElevatedButton(text=d.name, disabled=True) 
                 for d in detail.difficulties]

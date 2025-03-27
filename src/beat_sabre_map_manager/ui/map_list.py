@@ -16,7 +16,7 @@ class MapListUI:
 
         self._build_content()
     
-    def update_maps(self, bsmaps: list[Path]) -> None:
+    def update_maps(self, bsmaps: list[BSMap]) -> None:
         # TODO use
         self.bsmaps = bsmaps
 
@@ -29,13 +29,31 @@ class MapListUI:
                 on_click=self._on_list_tile_click,
                 data=bsmap,
             ))
+        
+        self._handle_ui_select(cast(list[ft.ListTile], self.content.controls)[0])
+    
+    def _handle_ui_select(self, selected_tile: ft.ListTile) -> None:
+        if self.content is None:
+            return
+
+        for item in self.content.controls:
+            item = cast(ft.ListTile, item)
+            item.bgcolor = None
+            item.text_color = None
+            cast(ft.Text, item.title).weight = ft.FontWeight.NORMAL
+
+        selected_tile.bgcolor = ft.Colors.BLUE_200
+        selected_tile.text_color = ft.Colors.BLUE_900
+        cast(ft.Text, selected_tile.title).weight = ft.FontWeight.BOLD
+
+        map_data = cast(BSMap, selected_tile.data)
+        self.detail_handle.build_content(map_data.detail)
 
     def _on_list_tile_click(self, e: ft.ControlEvent) -> None:
         """handle click event on a list tile in the map list, updates visual state of tiles and trings detail view
         Args:
             e (ft.ControlEvent): The click event containing the control that was clicked.
         """
-
         if self.content is None:
             return
         
@@ -43,20 +61,6 @@ class MapListUI:
             # same map as selected
             return
         
-        for item in self.content.controls:
-            item = cast(ft.ListTile, item)
-            item.bgcolor = None
-            item.text_color = None
-            cast(ft.Text, item.title).weight = ft.FontWeight.NORMAL
-        
-        e.control = cast(ft.ListTile, e.control)
-        e.control.bgcolor = ft.Colors.BLUE_200
-        e.control.text_color = ft.Colors.BLUE_900
-        cast(ft.Text, e.control.title).weight = ft.FontWeight.BOLD
-
+        self._handle_ui_select(e.control)
         self.selected_map = cast(ft.Text, e.control.title).value
-
-        map_data = cast(BSMap, e.control.data)
-        self.detail_handle.build_content(map_data.detail)
-
         self.content.update()
