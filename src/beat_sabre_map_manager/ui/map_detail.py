@@ -18,8 +18,8 @@ class MapDetailUI:
                 ft.Column([
                     ft.Image(
                         src_base64=get_base64_img(detail.cover_image_filename), 
-                        height=265, 
-                        width=265, 
+                        height=222, 
+                        width=222, 
                         fit=ft.ImageFit.FIT_WIDTH, 
                         border_radius=ft.border_radius.all(8)
                     ),
@@ -28,7 +28,14 @@ class MapDetailUI:
                     ft.TextField(label="Name", read_only=True, value=detail.song_name),
                     ft.TextField(label="Song author", read_only=True, value=detail.song_author_name),
                     ft.TextField(label="Map author", read_only=True, value=detail.level_author_name),
-                    ft.TextField(label="BPM", read_only=True, value=f"{detail.beats_per_minute:.0f} beats-per-minute"),
+                    ft.Row([
+                        ft.TextField(label="BPM", read_only=True, value=f"{detail.beats_per_minute:.0f}", width=80),
+                        ft.FilledButton(
+                            "Open audio file", bgcolor=ft.Colors.BLUE_300, color=ft.Colors.BLUE_900,  
+                            icon_color=ft.Colors.WHITE ,icon="music", style=ft.ButtonStyle(
+                                padding=ft.padding.all(16)
+                            ), on_click=lambda _: open_audio_file(detail.song_filename)),
+                    ])
                 ]),
             ], vertical_alignment=ft.CrossAxisAlignment.START),
             ft.Column([
@@ -39,14 +46,11 @@ class MapDetailUI:
             ]),
             ft.Column([
                 ft.Row([
-                    ft.FilledButton("Open audio file", bgcolor=ft.Colors.BLUE_700 ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="music", style=ft.ButtonStyle(
-                        padding=ft.padding.all(16)
-                    ), on_click=lambda _: open_audio_file(detail.song_filename)),
-                    ft.FilledButton("Remove", bgcolor=ft.Colors.RED ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="delete", style=ft.ButtonStyle(
+                    ft.FilledButton("Remove this map", bgcolor=ft.Colors.RED ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="delete", style=ft.ButtonStyle(
                             padding=ft.padding.all(16)
                         )),
-                ], alignment=ft.MainAxisAlignment.START)
-            ], expand=1, alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                ], alignment=ft.MainAxisAlignment.CENTER)
+            ], alignment=ft.MainAxisAlignment.END, expand=1),
         ])
 
         self.content.content = col
