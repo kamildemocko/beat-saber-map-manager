@@ -28,15 +28,17 @@ class MapDetailUI:
                     ft.TextField(label="Name", read_only=True, value=detail.song_name),
                     ft.TextField(label="Song author", read_only=True, value=detail.song_author_name),
                     ft.TextField(label="Map author", read_only=True, value=detail.level_author_name),
-                    ft.TextField(label="BPM", read_only=True, value=f"{detail.beats_per_minute:.1f}"),
+                    ft.TextField(label="BPM", read_only=True, value=f"{detail.beats_per_minute:.0f} beats-per-minute"),
                     ft.OutlinedButton(text="Open audio file", on_click=lambda _: open_audio_file(detail.song_filename)),
                 ]),
             ]),
-            ft.Row([
-                *[ft.ElevatedButton(text=d.name, disabled=True) 
-                for d in detail.difficulties]
-            ], alignment=ft.MainAxisAlignment.START, expand=1)
-        ], spacing=50)
+            ft.Column([
+                ft.Row([
+                    *[ft.ElevatedButton(text=d.name, disabled=True) 
+                    for d in detail.difficulties]
+                ], alignment=ft.MainAxisAlignment.START)
+            ])
+        ], alignment=ft.MainAxisAlignment.START)
 
         self.content.content = col
 
