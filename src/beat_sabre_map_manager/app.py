@@ -24,7 +24,7 @@ class App:
             ft.Container(
                 content=self.map_list.content,
                 height=400,
-                border=ft.border.all(2, ft.Colors.GREY_300),
+                border=ft.border.all(2, ft.Colors.BLUE_200),
                 border_radius=8
             )
         ]))
@@ -33,7 +33,7 @@ class App:
             ft.Container(
                 content=self.map_detail.content,
                 height=400,
-                border=ft.border.all(2, ft.Colors.GREY_300),
-                border_radius=8
+                border=ft.border.all(2, ft.Colors.BLUE_200),
+                border_radius=8,
             )
         ]))

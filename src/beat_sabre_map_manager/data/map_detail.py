@@ -1,7 +1,17 @@
+import atexit
+import base64
+import os
+import uuid
+from tempfile import TemporaryDirectory
+import shutil
 from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field
+
+
+tempdir = TemporaryDirectory()
+atexit.register(tempdir.cleanup)
 
 
 class _DifficultyBeatmap(BaseModel):
@@ -48,3 +58,20 @@ def get_map_detail(map_path: Path) -> MapDetail:
 
         return parsed
     
+
+
+def get_base64_img(path: str) -> str:
+    image_path = Path(path)
+
+    if image_path.exists():
+        return base64.b64encode(image_path.read_bytes()).decode("utf-8")
+    else:
+        return "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ep2G+IAAAAASUVORK5CYII="
+
+def open_audio_file(path: str) -> None:
+    audio_path = Path(path)
+
+    if audio_path.exists():
+        temp_audio_path = f"{tempdir.name}/{uuid.uuid4()}.ogg"
+        shutil.copy(audio_path, temp_audio_path)
+        os.startfile(temp_audio_path)
