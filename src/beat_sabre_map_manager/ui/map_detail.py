@@ -29,16 +29,25 @@ class MapDetailUI:
                     ft.TextField(label="Song author", read_only=True, value=detail.song_author_name),
                     ft.TextField(label="Map author", read_only=True, value=detail.level_author_name),
                     ft.TextField(label="BPM", read_only=True, value=f"{detail.beats_per_minute:.0f} beats-per-minute"),
-                    ft.OutlinedButton(text="Open audio file", on_click=lambda _: open_audio_file(detail.song_filename)),
                 ]),
-            ]),
+            ], vertical_alignment=ft.CrossAxisAlignment.START),
             ft.Column([
                 ft.Row([
                     *[ft.ElevatedButton(text=d.name, disabled=True) 
                     for d in detail.difficulties]
+                ])
+            ]),
+            ft.Column([
+                ft.Row([
+                    ft.FilledButton("Open audio file", bgcolor=ft.Colors.BLUE_700 ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="music", style=ft.ButtonStyle(
+                        padding=ft.padding.all(16)
+                    ), on_click=lambda _: open_audio_file(detail.song_filename)),
+                    ft.FilledButton("Remove", bgcolor=ft.Colors.RED ,color=ft.Colors.WHITE, icon_color=ft.Colors.WHITE ,icon="delete", style=ft.ButtonStyle(
+                            padding=ft.padding.all(16)
+                        )),
                 ], alignment=ft.MainAxisAlignment.START)
-            ])
-        ], alignment=ft.MainAxisAlignment.START)
+            ], expand=1, alignment=ft.MainAxisAlignment.SPACE_AROUND),
+        ])
 
         self.content.content = col
 
