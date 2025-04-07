@@ -45,7 +45,7 @@ class MapDetailUI:
                         for d in detail.difficulties],
                     ]),
                     ft.FilledButton(
-                        ft.Icons.DELETE, 
+                        "Delete",
                         bgcolor=ft.Colors.RED, 
                         color=ft.Colors.WHITE, 
                         icon_color=ft.Colors.WHITE, 

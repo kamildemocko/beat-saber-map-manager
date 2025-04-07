@@ -15,7 +15,7 @@ def main(page: ft.Page) -> None:
     logger.info("Starting app..")
 
     set_config(page)
-    app = App()
+    app = App(page)
 
     logger.info("Building UI..")
     app.build_ui(page)
