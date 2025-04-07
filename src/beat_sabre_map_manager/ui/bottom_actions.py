@@ -2,11 +2,14 @@ import flet as ft
 import importlib.metadata
 
 from beat_sabre_map_manager.data.new_map import add_new_map
+from beat_sabre_map_manager.ui.status import StatusUI
 
 VERSION = importlib.metadata.version("beat_sabre_map_manager")
 
 class BottomActionsUI:
-    def __init__(self) -> None:
+    def __init__(self, status_handle: StatusUI) -> None:
+        self.status_handle = status_handle
+
         self.content = ft.Container(
             content=ft.Row([]),
             padding=16,
@@ -59,43 +62,7 @@ class BottomActionsUI:
         results = []
         for file in e.files:
             result = add_new_map(file.path)
-            print(result)
-            if result:
-                results.append(result)
+            results.append(result)
         
         if results:
-            # Show error messages if any
-            error_dialog = ft.AlertDialog(
-                title=ft.Text("Map Installation Issues"),
-                content=ft.Text("\n".join(results)),
-            )
-            
-            def close_error_dialog(e):
-                error_dialog.open = False
-                e.page.update()
-            
-            error_dialog.actions = [
-                ft.TextButton("OK", on_click=close_error_dialog)
-            ]
-            
-            e.page.dialog = error_dialog
-            error_dialog.open = True
-            e.page.update()
-        else:
-            # Success message
-            success_dialog = ft.AlertDialog(
-                title=ft.Text("Success"),
-                content=ft.Text(f"Successfully installed {len(e.files)} map(s)"),
-            )
-            
-            def close_success_dialog(e):
-                success_dialog.open = False
-                e.page.update()
-            
-            success_dialog.actions = [
-                ft.TextButton("OK", on_click=close_success_dialog)
-            ]
-            
-            e.page.dialog = success_dialog
-            success_dialog.open = True
-            e.page.update()
+            self.status_handle.pop("\n".join(results))
