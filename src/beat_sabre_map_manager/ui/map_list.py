@@ -15,16 +15,14 @@ class MapListUI:
 
         self._build_content()
     
-    def update_maps(self, bsmaps: list[BSMap]) -> None:
-        # TODO use
-        self.bsmaps = bsmaps
-
     def _build_content(self) -> None:
         self.content = ft.ListView(expand=1)
 
         for bsmap in self.bsmaps:
+            tile_title = f"{bsmap.detail.song_author_name} - {bsmap.detail.song_name}"
+
             self.content.controls.append(ft.ListTile(
-                title=ft.Text(bsmap.name),
+                title=ft.Text(tile_title),
                 on_click=self._on_list_tile_click,
                 data=bsmap,
             ))

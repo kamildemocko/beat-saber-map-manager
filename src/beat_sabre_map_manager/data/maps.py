@@ -11,6 +11,7 @@ class BSMap:
     name: str
     path: Path
     detail: MapDetail
+    title: str
 
 class Maps:
     def __init__(self):
@@ -36,11 +37,17 @@ class Maps:
             except Exception:
                 continue
 
+            title = f"{detail.song_author_name} - {detail.song_name}"
+
             self.maps.append(
                 BSMap(
                     filename=mapdir.name, 
                     name=name,
                     path=mapdir,
-                    detail=detail
+                    detail=detail,
+                    title=title,
                 )
             )
+    
+    def sort_maps_asc(self, reverse: bool = False) -> None:
+        self.maps = sorted(self.maps, key=lambda x: x.title, reverse=reverse)
