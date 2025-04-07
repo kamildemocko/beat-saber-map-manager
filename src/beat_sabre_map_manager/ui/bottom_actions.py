@@ -67,10 +67,16 @@ class BottomActionsUI:
             return
 
         results = []
+        oks = 0
         for file in e.files:
-            result = add_new_map(file.path)
+            ok, result = add_new_map(file.path)
+            if ok:
+                oks += 1
+
             results.append(result)
         
         if results:
-            self.map_reload_callback()
             self.status_handle.pop("\n".join(results))
+
+        if oks > 0:
+            self.map_reload_callback()

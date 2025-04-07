@@ -53,7 +53,5 @@ class App:
 
     def build_ui(self, page: ft.Page) -> None:
         page.add(ft.Column([self.map_list_container]))
-
         page.add(ft.Column([self.map_detail_container]))
-
         page.add(ft.Column([self.bottom_actions_container]))
