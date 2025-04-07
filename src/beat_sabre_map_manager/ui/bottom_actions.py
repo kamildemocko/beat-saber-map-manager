@@ -1,3 +1,5 @@
+from typing import Callable
+
 import flet as ft
 import importlib.metadata
 
@@ -7,8 +9,13 @@ from beat_sabre_map_manager.ui.status import StatusUI
 VERSION = importlib.metadata.version("beat_sabre_map_manager")
 
 class BottomActionsUI:
-    def __init__(self, status_handle: StatusUI) -> None:
+    def __init__(
+        self, 
+        status_handle: StatusUI, 
+        map_reload_callback: Callable
+    ) -> None:
         self.status_handle = status_handle
+        self.map_reload_callback = map_reload_callback
 
         self.content = ft.Container(
             content=ft.Row([]),
@@ -65,4 +72,5 @@ class BottomActionsUI:
             results.append(result)
         
         if results:
+            self.map_reload_callback()
             self.status_handle.pop("\n".join(results))

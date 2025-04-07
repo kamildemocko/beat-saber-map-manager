@@ -48,9 +48,24 @@ class MapDetail(BaseModel):
 
         del self.difficulty_sets
             
+    @classmethod
+    def get_empty_map_detail(cls) -> "MapDetail":
+        return MapDetail(
+            _version="",
+            _songName="",
+            _songAuthorName="",
+            _levelAuthorName="",
+            _beatsPerMinute=0.0,
+            _songFilename="",
+            _coverImageFilename="",
+            _difficultyBeatmapSets=[]
+        )
 
 def get_map_detail(map_path: Path) -> MapDetail:
     info_file_path = map_path.joinpath("info.dat")
+    if not info_file_path.exists:
+        return MapDetail.get_empty_map_detail()
+
     with info_file_path.open("r", encoding="utf-8") as file:
         parsed = MapDetail.model_validate_json(file.read())
         parsed.song_filename = map_path.joinpath(parsed.song_filename).as_posix()

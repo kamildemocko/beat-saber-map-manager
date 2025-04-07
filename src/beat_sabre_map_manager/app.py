@@ -14,36 +14,46 @@ class App:
         status_handle = StatusUI(page)
 
         # set data handle for maps with details
-        maps_handle = Maps()
-        maps_handle.load_maps()
-        maps_handle.sort_maps_asc()
+        self.maps_handle = Maps()
+        self.maps_handle.load_maps()
+        self.maps_handle.sort_maps_asc()
 
         # set up UI
-        self.ui_map_detail = MapDetailUI(status_handle)
-        self.ui_map_list = MapListUI(maps_handle.maps, self.ui_map_detail)
-        self.ui_bottom_actions = BottomActionsUI(status_handle)
+        self.ui_map_detail = MapDetailUI(status_handle, self.reload_maps)
+        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
+        self.ui_bottom_actions = BottomActionsUI(status_handle, self.reload_maps)
+
+        # main containers
+        self.map_list_container = ft.Container(
+            content=self.ui_map_list.content,
+            height=400,
+            border=ft.border.all(2, ft.Colors.BLUE_200),
+            border_radius=8
+        )
+        
+        self.map_detail_container = ft.Container(
+            content=self.ui_map_detail.content,
+            height=300,
+            border=ft.border.all(2, ft.Colors.BLUE_200),
+            border_radius=8,
+        )
+        
+        self.bottom_actions_container = ft.Container(
+            content=self.ui_bottom_actions.content,
+        )
+    
+    def reload_maps(self) -> None:
+        self.maps_handle.reload_maps()
+        self.maps_handle.sort_maps_asc()
+        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
+
+        self.map_list_container.content = self.ui_map_list.content
+
+        self.page.update()
 
     def build_ui(self, page: ft.Page) -> None:
-        page.add(ft.Column([
-            ft.Container(
-                content=self.ui_map_list.content,
-                height=400,
-                border=ft.border.all(2, ft.Colors.BLUE_200),
-                border_radius=8
-            )
-        ]))
+        page.add(ft.Column([self.map_list_container]))
 
-        page.add(ft.Column([
-            ft.Container(
-                content=self.ui_map_detail.content,
-                height=300,
-                border=ft.border.all(2, ft.Colors.BLUE_200),
-                border_radius=8,
-            )
-        ]))
+        page.add(ft.Column([self.map_detail_container]))
 
-        page.add(ft.Column([
-            ft.Container(
-                content=self.ui_bottom_actions.content,
-            )
-        ]))
+        page.add(ft.Column([self.bottom_actions_container]))

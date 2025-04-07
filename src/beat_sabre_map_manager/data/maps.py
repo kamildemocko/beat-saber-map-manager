@@ -22,6 +22,10 @@ class Maps:
         match = re.search(r"^\w{4}\s{1}\((.*)\)$", name)
         return None if match is None else match.group(1)
     
+    def reload_maps(self) -> None:
+        self.maps = []
+        self.load_maps()
+    
     def load_maps(self) -> None:
         game_path = BSPath().find_game_path()
         for mapdir in game_path.glob("*"):
