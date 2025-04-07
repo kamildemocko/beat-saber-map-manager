@@ -36,10 +36,7 @@ class Maps:
             if name is None:
                 continue
 
-            try:
-                detail = get_map_detail(mapdir)
-            except Exception:
-                continue
+            detail = get_map_detail(mapdir)
 
             title = f"{detail.song_author_name} - {detail.song_name}"
 
