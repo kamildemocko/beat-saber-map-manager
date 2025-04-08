@@ -5,6 +5,7 @@ import importlib.metadata
 
 from beat_sabre_map_manager.data.new_map import add_new_map
 from beat_sabre_map_manager.ui.status import StatusUI
+from beat_sabre_map_manager.error_handling import with_snackbar_err_popup
 
 VERSION = importlib.metadata.version("beat_sabre_map_manager")
 
@@ -15,6 +16,7 @@ class BottomActionsUI:
         map_reload_callback: Callable
     ) -> None:
         self.status_handle = status_handle
+        self.err_decor = with_snackbar_err_popup(status_handle)
         self.map_reload_callback = map_reload_callback
 
         self.content = ft.Container(
@@ -36,7 +38,7 @@ class BottomActionsUI:
                     style=ft.ButtonStyle(
                         padding=ft.padding.all(16)
                     ),
-                    on_click=self._handle_add_new_map,
+                    on_click=self.err_decor(self._handle_add_new_map),
                 ),
             ], alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([
