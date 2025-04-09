@@ -1,4 +1,5 @@
 from typing import Callable
+import os
 
 import flet as ft
 import importlib.metadata
@@ -30,7 +31,7 @@ class BottomActionsUI:
         col = ft.Column([
             ft.Row([
                 ft.FilledButton(
-                    "Add new map", 
+                    "Install | ZIP file", 
                     bgcolor=ft.Colors.BLUE_200, 
                     color=ft.Colors.BLUE_900, 
                     icon_color=ft.Colors.BLUE_900,  
@@ -39,6 +40,28 @@ class BottomActionsUI:
                         padding=ft.padding.all(16)
                     ),
                     on_click=self.err_decor(self._handle_add_new_map),
+                ),
+                ft.FilledButton(
+                    "Get | Beatsaver", 
+                    bgcolor=ft.Colors.LIME_200, 
+                    color=ft.Colors.BLACK, 
+                    icon_color=ft.Colors.BLACK,  
+                    icon=ft.Icons.OPEN_IN_BROWSER, 
+                    style=ft.ButtonStyle(
+                        padding=ft.padding.all(16)
+                    ),
+                    on_click=self.err_decor(lambda _: self._handle_get_maps()),
+                ),
+                ft.FilledButton(
+                    "Create | Beatmapper", 
+                    bgcolor=ft.Colors.LIME_200, 
+                    color=ft.Colors.BLACK, 
+                    icon_color=ft.Colors.BLACK,  
+                    icon=ft.Icons.INTERESTS_ROUNDED, 
+                    style=ft.ButtonStyle(
+                        padding=ft.padding.all(16)
+                    ),
+                    on_click=self.err_decor(lambda _: self._handle_crate_maps()),
                 ),
             ], alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([
@@ -62,6 +85,14 @@ class BottomActionsUI:
             allowed_extensions=["zip"],
             allow_multiple=True
         )
+
+    def _handle_get_maps(self) -> None:
+        self.status_handle.pop("Opening www.beatsaber.com")
+        os.system('start "" https://beatsaver.com')
+
+    def _handle_crate_maps(self) -> None:
+        self.status_handle.pop("Opening www.beatmapper.app")
+        os.system('start "" https://beatmapper.app')
     
     def process_user_picked_files(self, e: ft.FilePickerResultEvent) -> None:
         """Process the files selected in the file picker dialog"""

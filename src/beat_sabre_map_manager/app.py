@@ -6,7 +6,7 @@ from beat_sabre_map_manager.ui.bottom_actions import BottomActionsUI
 from beat_sabre_map_manager.data.maps import Maps
 from beat_sabre_map_manager.ui.status import StatusUI
 
-# TODO: filter, search, open folder, open webpage
+# TODO: filter, search, beatsaver next to add map
 
 class App:
     def __init__(self, page: ft.Page) -> None:
