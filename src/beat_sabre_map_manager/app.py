@@ -1,4 +1,3 @@
-from email.policy import default
 from typing import Literal
 
 import flet as ft
@@ -9,8 +8,6 @@ from beat_sabre_map_manager.ui.bottom_actions import BottomActionsUI
 from beat_sabre_map_manager.ui.top_actions import TopActionsUI
 from beat_sabre_map_manager.data.maps import Maps
 from beat_sabre_map_manager.ui.status import StatusUI
-
-# TODO: search,
 
 class App:
     def __init__(self, page: ft.Page) -> None:
@@ -33,15 +30,15 @@ class App:
         # main containers
         self.map_list_container = ft.Container(
             content=self.ui_map_list.content,
-            height=400,
-            border=ft.border.all(2, ft.Colors.BLUE_200),
+            height=530,
+            border=ft.border.all(2, ft.Colors.PRIMARY),
             border_radius=8
         )
         
         self.map_detail_container = ft.Container(
             content=self.ui_map_detail.content,
             height=300,
-            border=ft.border.all(2, ft.Colors.BLUE_200),
+            border=ft.border.all(2, ft.Colors.PRIMARY),
             border_radius=8,
         )
         

@@ -49,28 +49,44 @@ class MapDetailUI:
                     ft.Row([
                         ft.TextField(label="BPM", read_only=True, value=f"{bsmap.detail.beats_per_minute:.0f}", width=80),
                         ft.IconButton(
-                            tooltip="Play in external player", bgcolor=ft.Colors.BLUE_300,
-                            icon_color=ft.Colors.BLUE_900 ,icon=ft.Icons.MUSIC_NOTE, style=ft.ButtonStyle(
-                                padding=ft.padding.all(8)
+                            tooltip="Play in external player", 
+                            icon_color=ft.Colors.BLACK ,icon=ft.Icons.MUSIC_NOTE, style=ft.ButtonStyle(
+                                padding=ft.padding.all(8),
+                                bgcolor={
+                                    ft.ControlState.DEFAULT: ft.Colors.SECONDARY,
+                                    ft.ControlState.HOVERED: ft.Colors.PRIMARY,
+                                },
                             ), on_click=self.err_decor(lambda _: self._handle_open_audio(bsmap.detail))
                         ),
                         ft.IconButton(
-                            tooltip="Open map folder location", bgcolor=ft.Colors.AMBER_300,
+                            tooltip="Open map folder location", 
                             icon_color=ft.Colors.BLACK ,icon=ft.Icons.FOLDER_OPEN, style=ft.ButtonStyle(
-                                padding=ft.padding.all(8)
+                                padding=ft.padding.all(8),
+                                bgcolor={
+                                    ft.ControlState.DEFAULT: ft.Colors.SECONDARY,
+                                    ft.ControlState.HOVERED: ft.Colors.PRIMARY,
+                                },
                             ), on_click=self.err_decor(lambda _: self._handle_open_folder(bsmap))
                         ),
                         ft.IconButton(
-                            tooltip="Search YouTube", bgcolor=ft.Colors.RED_ACCENT_700,
-                            icon_color=ft.Colors.WHITE ,icon=ft.Icons.YOUTUBE_SEARCHED_FOR_ROUNDED, style=ft.ButtonStyle(
-                                padding=ft.padding.all(8)
+                            tooltip="Search YouTube", 
+                            icon_color=ft.Colors.BLACK ,icon=ft.Icons.YOUTUBE_SEARCHED_FOR_ROUNDED, style=ft.ButtonStyle(
+                                padding=ft.padding.all(8),
+                                bgcolor={
+                                    ft.ControlState.DEFAULT: ft.Colors.SECONDARY,
+                                    ft.ControlState.HOVERED: ft.Colors.PRIMARY,
+                                },
                             ), on_click=self.err_decor(lambda _: self._handle_search_youtube(bsmap))
                         ),
                         ft.Container(expand=1),
                         ft.IconButton(
-                            tooltip="Delete map", bgcolor=ft.Colors.RED,
+                            tooltip="Delete map", 
                             icon_color=ft.Colors.WHITE ,icon=ft.Icons.DELETE, style=ft.ButtonStyle(
-                                padding=ft.padding.all(8)
+                                padding=ft.padding.all(8),
+                                bgcolor={
+                                    ft.ControlState.DEFAULT: ft.Colors.RED,
+                                    ft.ControlState.HOVERED: ft.Colors.RED_900,
+                                },
                             ), on_click=self.err_decor(lambda _: self._handle_delete_map(bsmap))
                         ),
                     ]),

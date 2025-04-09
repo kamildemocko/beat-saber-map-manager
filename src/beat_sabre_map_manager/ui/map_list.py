@@ -39,8 +39,8 @@ class MapListUI:
             item.text_color = None
             cast(ft.Text, item.title).weight = ft.FontWeight.NORMAL
 
-        selected_tile.bgcolor = ft.Colors.BLUE_200
-        selected_tile.text_color = ft.Colors.BLUE_900
+        selected_tile.bgcolor = ft.Colors.PRIMARY
+        selected_tile.text_color = ft.Colors.BLACK
         cast(ft.Text, selected_tile.title).weight = ft.FontWeight.BOLD
 
         map_data = cast(BSMap, selected_tile.data)
