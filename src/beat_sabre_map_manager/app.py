@@ -3,6 +3,7 @@ import flet as ft
 from beat_sabre_map_manager.ui.map_list import MapListUI
 from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 from beat_sabre_map_manager.ui.bottom_actions import BottomActionsUI
+from beat_sabre_map_manager.ui.top_actions import TopActionsUI
 from beat_sabre_map_manager.data.maps import Maps
 from beat_sabre_map_manager.ui.status import StatusUI
 
@@ -24,6 +25,7 @@ class App:
         self.ui_map_detail = MapDetailUI(status_handle, self.reload_maps)
         self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
         self.ui_bottom_actions = BottomActionsUI(status_handle, self.reload_maps)
+        self.ui_top_actions = TopActionsUI(self.reload_maps)
 
         # main containers
         self.map_list_container = ft.Container(
@@ -43,6 +45,10 @@ class App:
         self.bottom_actions_container = ft.Container(
             content=self.ui_bottom_actions.content,
         )
+
+        self.top_actions_container = ft.Container(
+            content=self.ui_top_actions.content,
+        )
     
     def reload_maps(self) -> None:
         self.maps_handle.reload_maps()
@@ -54,6 +60,7 @@ class App:
         self.page.update()
 
     def build_ui(self, page: ft.Page) -> None:
+        page.add(ft.Column([self.top_actions_container]))
         page.add(ft.Column([self.map_list_container]))
         page.add(ft.Column([self.map_detail_container]))
         page.add(ft.Column([self.bottom_actions_container]))
