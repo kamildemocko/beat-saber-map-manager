@@ -50,5 +50,8 @@ class Maps:
                 )
             )
     
-    def sort_maps_asc(self, reverse: bool = False) -> None:
-        self.maps = sorted(self.maps, key=lambda x: x.title, reverse=reverse)
+    def sort_maps_interpret_asc(self, reverse: bool = False) -> None:
+        self.maps = sorted(self.maps, key=lambda x: x.detail.song_author_name, reverse=reverse)
+
+    def sort_maps_song_asc(self, reverse: bool = False) -> None:
+        self.maps = sorted(self.maps, key=lambda x: x.detail.song_name, reverse=reverse)
