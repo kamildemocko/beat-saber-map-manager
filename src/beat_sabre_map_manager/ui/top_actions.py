@@ -21,10 +21,10 @@ class TopActionsUI:
         col = ft.Column([
             ft.Row([
                 ft.SegmentedButton(segments=[
-                    ft.Segment(value="interpret_asc", label=ft.Text("Interpret: A - Z")),
-                    ft.Segment(value="interpret_desc", label=ft.Text("Interpret: Z - A")),
-                    ft.Segment(value="song_asc", label=ft.Text("Song: A - Z")),
-                    ft.Segment(value="song_desc", label=ft.Text("Song: Z - A")),
+                    ft.Segment(value="interpret_asc", label=ft.Text("Interpret A - Z")),
+                    ft.Segment(value="interpret_desc", label=ft.Text("Interpret Z - A")),
+                    ft.Segment(value="song_asc", label=ft.Text("Song A - Z")),
+                    ft.Segment(value="song_desc", label=ft.Text("Song Z - A")),
                 ], selected={"interpret_asc"}, on_change=self._handle_change, expand=1)
             ], alignment=ft.MainAxisAlignment.CENTER)
         ])

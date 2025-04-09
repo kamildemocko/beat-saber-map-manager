@@ -43,9 +43,9 @@ class BottomActionsUI:
                 ),
                 ft.FilledButton(
                     "Get | Beatsaver", 
-                    bgcolor=ft.Colors.LIME_200, 
-                    color=ft.Colors.BLACK, 
-                    icon_color=ft.Colors.BLACK,  
+                    bgcolor=ft.Colors.BLUE_100, 
+                    color=ft.Colors.BLUE_900, 
+                    icon_color=ft.Colors.BLUE_900,  
                     icon=ft.Icons.OPEN_IN_BROWSER, 
                     style=ft.ButtonStyle(
                         padding=ft.padding.all(16)
@@ -54,9 +54,9 @@ class BottomActionsUI:
                 ),
                 ft.FilledButton(
                     "Create | Beatmapper", 
-                    bgcolor=ft.Colors.LIME_200, 
-                    color=ft.Colors.BLACK, 
-                    icon_color=ft.Colors.BLACK,  
+                    bgcolor=ft.Colors.BLUE_200, 
+                    color=ft.Colors.BLUE_900, 
+                    icon_color=ft.Colors.BLUE_900,  
                     icon=ft.Icons.INTERESTS_ROUNDED, 
                     style=ft.ButtonStyle(
                         padding=ft.padding.all(16)
