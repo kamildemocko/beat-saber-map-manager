@@ -19,11 +19,14 @@ class MapListUI:
         self.content = ft.ListView(expand=1)
 
         for bsmap in self.bsmaps:
+            tail = "⬩".join([d.name for d in bsmap.detail.difficulties])
+
             self.content.controls.append(ft.ListTile(
                 title=ft.Text(bsmap.detail.song_name),
                 subtitle=ft.Text(bsmap.detail.song_author_name),
                 on_click=self._on_list_tile_click,
                 leading=ft.Icon(ft.Icons.MULTITRACK_AUDIO),
+                trailing=ft.Text(tail),
                 data=bsmap,
             ))
         

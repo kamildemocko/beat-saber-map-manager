@@ -27,6 +27,9 @@ class Difficulty(BaseModel):
     name: str
     rank: int
 
+    def __hash__(self) -> int:
+        return hash((self.name, self.rank))
+
 
 class MapDetail(BaseModel):
     version: str = Field(alias="_version")
@@ -39,15 +42,32 @@ class MapDetail(BaseModel):
     difficulty_sets: list[_MapDifficultySet] = Field(alias="_difficultyBeatmapSets")
     difficulties: list[Difficulty] = []
     
+    @staticmethod
+    def sort_difficulty(difficulties: list[Difficulty]) -> list[Difficulty]:
+        correct = ["easy", "normal", "hard", "expert", "expertplus"]
+        output: list[Difficulty] = []
+
+        for pol in correct:
+            for d in difficulties:
+                if pol != d.name.lower():
+                    continue
+                
+                output.append(d)
+        
+        return output
+            
     def model_post_init(self, _context: Any) -> None:
         for dset in self.difficulty_sets:
             self.difficulties.extend(
-                [Difficulty(name=d.difficulty, rank=d.difficulty_rank)
-                for d in dset.difficulty_beatmaps]
+                (Difficulty(name=d.difficulty, rank=d.difficulty_rank)
+                for d in dset.difficulty_beatmaps)
             )
+        
+        self.difficulties = list(set(self.difficulties))
+        self.difficulties = self.sort_difficulty(self.difficulties)
 
         del self.difficulty_sets
-            
+    
     @classmethod
     def get_empty_map_detail(cls) -> "MapDetail":
         return MapDetail(
