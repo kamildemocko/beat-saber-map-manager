@@ -35,7 +35,7 @@ class App:
         self.ui_map_detail = MapDetailUI(status_handle, self.reload_maps)
         self.ui_bottom_actions = BottomActionsUI(game_path, status_handle, self.reload_maps)
         self.ui_top_actions = TopActionsUI(self.reload_maps)
-        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail, "interpret_asc")
+        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
 
         # main containers
         self.map_list_container = ft.Container(
@@ -64,7 +64,6 @@ class App:
         "interpret_asc", "interpret_desc", "song_asc", "song_desc"
     ] = "interpret_asc") -> None:
         self.maps_handle.reload_maps()
-        self.ui_map_list.sorting = sorting
 
         match sorting:
             case "interpret_desc":
@@ -76,7 +75,7 @@ class App:
             case _: 
                 self.maps_handle.sort_maps_interpret_asc()
 
-        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail, sorting)
+        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
         self.map_list_container.content = self.ui_map_list.content
 
         self.page.update()
