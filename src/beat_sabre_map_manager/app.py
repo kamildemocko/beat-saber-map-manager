@@ -30,7 +30,7 @@ class App:
 
         # set up UI
         self.ui_map_detail = MapDetailUI(status_handle, self.reload_maps)
-        self.ui_bottom_actions = BottomActionsUI(status_handle, self.reload_maps)
+        self.ui_bottom_actions = BottomActionsUI(game_path, status_handle, self.reload_maps)
         self.ui_top_actions = TopActionsUI(self.reload_maps)
         self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
 

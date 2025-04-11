@@ -1,5 +1,6 @@
 from typing import Callable
 import os
+from pathlib import Path
 
 import flet as ft
 import importlib.metadata
@@ -13,9 +14,11 @@ VERSION = importlib.metadata.version("beat_sabre_map_manager")
 class BottomActionsUI:
     def __init__(
         self, 
+        game_path: Path,
         status_handle: StatusUI, 
         map_reload_callback: Callable
     ) -> None:
+        self.game_path = game_path
         self.status_handle = status_handle
         self.err_decor = with_snackbar_err_popup(status_handle)
         self.map_reload_callback = map_reload_callback
@@ -114,7 +117,7 @@ class BottomActionsUI:
         results = []
         oks = 0
         for file in e.files:
-            ok, result = add_new_map(file.path)
+            ok, result = add_new_map(self.game_path, file.path)
             if ok:
                 oks += 1
 
