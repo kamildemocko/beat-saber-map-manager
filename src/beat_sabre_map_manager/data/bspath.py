@@ -11,6 +11,8 @@ class BSPath:
         if self.path is not None:
             return self.path, ""
 
+        print("Finding game path..")
+
         found_paths = []
 
         steam_root_path, err = self._get_steam_path()

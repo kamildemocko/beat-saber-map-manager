@@ -10,6 +10,8 @@ from beat_sabre_map_manager.data.maps import Maps
 from beat_sabre_map_manager.data.bspath import BSPath
 from beat_sabre_map_manager.ui.status import StatusUI
 
+# TODO: add name and song name split - middle
+
 class App:
     def __init__(self, page: ft.Page) -> None:
         self.page = page

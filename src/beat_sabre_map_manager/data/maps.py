@@ -11,6 +11,7 @@ class BSMap:
     path: Path
     detail: MapDetail
     title: str
+    uid: str
 
 class Maps:
     def __init__(self, game_path: Path):
@@ -27,6 +28,8 @@ class Maps:
         self.load_maps()
     
     def load_maps(self) -> None:
+        print("Loading maps..")
+
         for mapdir in self.game_path.glob("*"):
             if not mapdir.is_dir():
                 continue
@@ -48,6 +51,7 @@ class Maps:
                     path=mapdir,
                     detail=detail,
                     title=title,
+                    uid=mapdir.name.split(" ")[0],
                 )
             )
     

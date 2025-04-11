@@ -47,7 +47,7 @@ class MapDetailUI:
                     ft.TextField(label="Song author", read_only=True, value=bsmap.detail.song_author_name),
                     ft.TextField(label="Map author", read_only=True, value=bsmap.detail.level_author_name),
                     ft.Row([
-                        ft.TextField(label="BPM", read_only=True, value=f"{bsmap.detail.beats_per_minute:.0f}", width=80),
+                        ft.TextField(label="BPM", read_only=True, value=f"{bsmap.detail.beats_per_minute:.0f}", width=70),
                         ft.IconButton(
                             tooltip="Play in external player", 
                             icon_color=ft.Colors.BLACK ,icon=ft.Icons.MUSIC_NOTE, style=ft.ButtonStyle(
@@ -69,8 +69,18 @@ class MapDetailUI:
                             ), on_click=self.err_decor(lambda _: self._handle_open_folder(bsmap))
                         ),
                         ft.IconButton(
+                            tooltip="Open map on www.beatsaver.com", 
+                            icon_color=ft.Colors.BLACK ,icon=ft.Icons.CHROME_READER_MODE, style=ft.ButtonStyle(
+                                padding=ft.padding.all(8),
+                                bgcolor={
+                                    ft.ControlState.DEFAULT: ft.Colors.SECONDARY,
+                                    ft.ControlState.HOVERED: ft.Colors.PRIMARY,
+                                },
+                            ), on_click=self.err_decor(lambda _: self._handle_open_beatsaver(bsmap))
+                        ),
+                        ft.IconButton(
                             tooltip="Search YouTube", 
-                            icon_color=ft.Colors.BLACK ,icon=ft.Icons.YOUTUBE_SEARCHED_FOR_ROUNDED, style=ft.ButtonStyle(
+                            icon_color=ft.Colors.BLACK ,icon=ft.Icons.MANAGE_SEARCH, style=ft.ButtonStyle(
                                 padding=ft.padding.all(8),
                                 bgcolor={
                                     ft.ControlState.DEFAULT: ft.Colors.SECONDARY,
@@ -113,6 +123,10 @@ class MapDetailUI:
     def _handle_open_audio(self, map_detail: MapDetail) -> None:
         open_audio_file(map_detail.song_filename)
         self.status_handle.pop(f"Opened audio file {map_detail.song_name} in default music player")
+
+    def _handle_open_beatsaver(self, bsmap: BSMap) -> None:
+        self.status_handle.pop(f"Open map on www.beatsaver.com with id: {bsmap.uid}")
+        os.system(f'start "" https://beatsaver.com/maps/{bsmap.uid}')
 
     def _handle_search_youtube(self, bsmap: BSMap) -> None:
         self.status_handle.pop(f"Search YouTube for map {bsmap.title}")
