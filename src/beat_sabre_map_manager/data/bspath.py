@@ -3,21 +3,20 @@ import winreg
 import re
 
 
-class BSPathError(Exception):
-    ...
-
-
 class BSPath:
     def __init__(self):
         self.path: Path | None = None
     
-    def find_game_path(self) -> Path:
+    def find_game_path(self) -> tuple[Path, str]:
         if self.path is not None:
-            return self.path
+            return self.path, ""
 
         found_paths = []
 
-        steam_root_path = self._get_steam_path()
+        steam_root_path, err = self._get_steam_path()
+        if err != "":
+            return Path(), "steam path not found"
+        
         steam_steamapps_paths = self._get_steamapps_path(steam_root_path)
 
         for path in steam_steamapps_paths:
@@ -28,19 +27,19 @@ class BSPath:
         
         match len(found_paths):
             case 0: 
-                raise BSPathError("game folder not found")
+                return Path(), "game folder not found"
             case x if x > 1:
-                raise BSPathError("multiple game folders were found")
+                return Path(), "multiple game folders were found"
             case _:
                 self.path = (Path(found_paths[0])
                              .joinpath("Beat Saber_Data")
                              .joinpath("CustomLevels"))
-                return self.path
+                return self.path, ""
         
         
 
     @staticmethod
-    def _get_steam_path() -> Path:
+    def _get_steam_path() -> tuple[Path, str]:
         """tries to get the steam install path from the registry
 
         Returns:
@@ -55,10 +54,10 @@ class BSPath:
 
             install_path = winreg.QueryValueEx(key, r"InstallPath")
 
-            return Path(install_path[0])
+            return Path(install_path[0]), ""
 
-        except FileNotFoundError as fnfe:
-            raise BSPathError("Steam install path not found") from fnfe
+        except FileNotFoundError:
+            return Path(), "Steam install path not found"
 
     @staticmethod
     def _get_steamapps_path(steam_root_path: Path) -> list[Path]:

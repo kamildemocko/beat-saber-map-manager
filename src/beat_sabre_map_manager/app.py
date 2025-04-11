@@ -7,17 +7,24 @@ from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 from beat_sabre_map_manager.ui.bottom_actions import BottomActionsUI
 from beat_sabre_map_manager.ui.top_actions import TopActionsUI
 from beat_sabre_map_manager.data.maps import Maps
+from beat_sabre_map_manager.data.bspath import BSPath
 from beat_sabre_map_manager.ui.status import StatusUI
 
 class App:
     def __init__(self, page: ft.Page) -> None:
         self.page = page
+        self.error = ""
 
         # set data handle for popups
         status_handle = StatusUI(page)
 
         # set data handle for maps with details
-        self.maps_handle = Maps()
+        game_path, err = BSPath().find_game_path()
+        if err != "":
+            self.error = err
+            return
+
+        self.maps_handle = Maps(game_path)
         self.maps_handle.load_maps()
         self.maps_handle.sort_maps_interpret_asc()
 
@@ -71,7 +78,20 @@ class App:
         self.page.update()
 
     def build_ui(self, page: ft.Page) -> None:
-        page.add(ft.Column([self.top_actions_container]))
-        page.add(ft.Column([self.map_list_container]))
-        page.add(ft.Column([self.map_detail_container]))
-        page.add(ft.Column([self.bottom_actions_container]))
+        if self.error != "":
+            page.add(
+                ft.Row([
+                    ft.Column([
+                        ft.Icon(ft.Icons.ERROR, size=80),
+                        ft.Text("Error!", size=40, weight=ft.FontWeight.BOLD),
+                        ft.Text(self.error, size=20),
+                    ], 
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+                ], alignment=ft.MainAxisAlignment.CENTER, expand=1),
+            )
+        else:
+            page.add(ft.Column([self.top_actions_container]))
+            page.add(ft.Column([self.map_list_container]))
+            page.add(ft.Column([self.map_detail_container]))
+            page.add(ft.Column([self.bottom_actions_container]))

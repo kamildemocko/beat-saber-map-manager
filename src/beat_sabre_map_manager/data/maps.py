@@ -2,7 +2,6 @@ from pathlib import Path
 from dataclasses import dataclass
 import re
 
-from beat_sabre_map_manager.data.bspath import BSPath
 from beat_sabre_map_manager.data.map_detail import get_map_detail, MapDetail
 
 @dataclass
@@ -14,7 +13,8 @@ class BSMap:
     title: str
 
 class Maps:
-    def __init__(self):
+    def __init__(self, game_path: Path):
+        self.game_path = game_path
         self.maps: list[BSMap] = []
     
     @staticmethod
@@ -27,8 +27,7 @@ class Maps:
         self.load_maps()
     
     def load_maps(self) -> None:
-        game_path = BSPath().find_game_path()
-        for mapdir in game_path.glob("*"):
+        for mapdir in self.game_path.glob("*"):
             if not mapdir.is_dir():
                 continue
 
