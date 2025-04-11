@@ -2,6 +2,8 @@ from pathlib import Path
 from dataclasses import dataclass
 import re
 
+from loguru import logger
+
 from beat_sabre_map_manager.data.map_detail import get_map_detail, MapDetail
 
 @dataclass
@@ -28,7 +30,7 @@ class Maps:
         self.load_maps()
     
     def load_maps(self) -> None:
-        print("Loading maps..")
+        logger.info("Loading maps..")
 
         for mapdir in self.game_path.glob("*"):
             if not mapdir.is_dir():

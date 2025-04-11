@@ -2,6 +2,8 @@ from pathlib import Path
 import winreg
 import re
 
+from loguru import logger
+
 
 class BSPath:
     def __init__(self):
@@ -11,7 +13,7 @@ class BSPath:
         if self.path is not None:
             return self.path, ""
 
-        print("Finding game path..")
+        logger.info("Finding game path..")
 
         found_paths = []
 

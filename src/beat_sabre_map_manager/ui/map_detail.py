@@ -49,7 +49,7 @@ class MapDetailUI:
                     ft.Row([
                         ft.TextField(label="BPM", read_only=True, value=f"{bsmap.detail.beats_per_minute:.0f}", width=70),
                         ft.IconButton(
-                            tooltip="Play in external player", 
+                            tooltip="Play in external audio player", 
                             icon_color=ft.Colors.BLACK ,icon=ft.Icons.MUSIC_NOTE, style=ft.ButtonStyle(
                                 padding=ft.padding.all(8),
                                 bgcolor={

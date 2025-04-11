@@ -1,6 +1,7 @@
 from typing import Literal
 
 import flet as ft
+from loguru import logger
 
 from beat_sabre_map_manager.ui.map_list import MapListUI
 from beat_sabre_map_manager.ui.map_detail import MapDetailUI
@@ -24,6 +25,7 @@ class App:
         game_path, err = BSPath().find_game_path()
         if err != "":
             self.error = err
+            logger.error(err)
             return
 
         self.maps_handle = Maps(game_path)
@@ -59,10 +61,9 @@ class App:
             content=self.ui_top_actions.content,
         )
     
-    def reload_maps(
-        self, 
-        sorting: Literal["interpret_asc", "interpret_desc", "song_asc", "song_desc"] = "interpret_asc"
-    ) -> None:
+    def reload_maps(self, sorting: Literal[
+        "interpret_asc", "interpret_desc", "song_asc", "song_desc"
+    ] = "interpret_asc") -> None:
         self.maps_handle.reload_maps()
         match sorting:
             case "interpret_desc":
