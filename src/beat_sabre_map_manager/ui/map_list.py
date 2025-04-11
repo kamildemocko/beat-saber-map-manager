@@ -24,6 +24,7 @@ class MapListUI:
             self.content.controls.append(ft.ListTile(
                 title=ft.Text(tile_title),
                 on_click=self._on_list_tile_click,
+                leading=ft.Icon(ft.Icons.MULTITRACK_AUDIO),
                 data=bsmap,
             ))
         
@@ -38,10 +39,12 @@ class MapListUI:
             item.bgcolor = None
             item.text_color = None
             cast(ft.Text, item.title).weight = ft.FontWeight.NORMAL
+            cast(ft.Icon, item.leading).color = ft.Colors.WHITE
 
         selected_tile.bgcolor = ft.Colors.PRIMARY
         selected_tile.text_color = ft.Colors.BLACK
         cast(ft.Text, selected_tile.title).weight = ft.FontWeight.BOLD
+        cast(ft.Icon, selected_tile.leading).color = ft.Colors.BLACK
 
         map_data = cast(BSMap, selected_tile.data)
         self.detail_handle.build_content(map_data)
