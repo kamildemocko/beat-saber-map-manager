@@ -19,7 +19,7 @@ class Maps:
     
     @staticmethod
     def _get_name_if_valid(name: str) -> str | None:
-        match = re.search(r"^\w{4}\s{1}\((.*)\)$", name)
+        match = re.search(r"^\w{1,6}\s{1}\((.*)\)$", name)
         return None if match is None else match.group(1)
     
     def reload_maps(self) -> None:
@@ -35,7 +35,9 @@ class Maps:
             if name is None:
                 continue
 
-            detail = get_map_detail(mapdir)
+            detail, err = get_map_detail(mapdir)
+            if err != "":
+                continue
 
             title = f"{detail.song_author_name} - {detail.song_name}"
 

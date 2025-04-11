@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 
 
 tempdir = TemporaryDirectory()
@@ -61,17 +61,21 @@ class MapDetail(BaseModel):
             _difficultyBeatmapSets=[]
         )
 
-def get_map_detail(map_path: Path) -> MapDetail:
+def get_map_detail(map_path: Path) -> tuple[MapDetail, str]:
     info_file_path = map_path.joinpath("info.dat")
     if not info_file_path.exists:
-        return MapDetail.get_empty_map_detail()
+        return MapDetail.get_empty_map_detail(), ""
 
-    with info_file_path.open("r", encoding="utf-8") as file:
-        parsed = MapDetail.model_validate_json(file.read())
-        parsed.song_filename = map_path.joinpath(parsed.song_filename).as_posix()
-        parsed.cover_image_filename = map_path.joinpath(parsed.cover_image_filename).as_posix()
+    try:
+        with info_file_path.open("r", encoding="utf-8") as file:
+            parsed = MapDetail.model_validate_json(file.read())
+            parsed.song_filename = map_path.joinpath(parsed.song_filename).as_posix()
+            parsed.cover_image_filename = map_path.joinpath(parsed.cover_image_filename).as_posix()
 
-        return parsed
+            return parsed, ""
+
+    except ValidationError:
+        return MapDetail.get_empty_map_detail(), "unsupported map"
     
 
 
