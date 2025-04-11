@@ -7,11 +7,12 @@ from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 
 
 class MapListUI:
-    def __init__(self, bsmaps: list[BSMap], detail_handle: MapDetailUI) -> None:
+    def __init__(self, bsmaps: list[BSMap], detail_handle: MapDetailUI, sorting: str) -> None:
         self.content: ft.ListView | None = None
         self.bsmaps = bsmaps
         self.selected_map: str | None =  None
         self.detail_handle = detail_handle
+        self.sorting = sorting
 
         self._build_content()
     
@@ -19,7 +20,10 @@ class MapListUI:
         self.content = ft.ListView(expand=1)
 
         for bsmap in self.bsmaps:
-            tile_title = f"{bsmap.detail.song_author_name} - {bsmap.detail.song_name}"
+            if self.sorting.startswith("interpret"):
+                tile_title = f"{bsmap.detail.song_author_name} ◆ {bsmap.detail.song_name}"
+            else:
+                tile_title = f"{bsmap.detail.song_name} ◆ {bsmap.detail.song_author_name}"
 
             self.content.controls.append(ft.ListTile(
                 title=ft.Text(tile_title),

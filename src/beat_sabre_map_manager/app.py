@@ -11,7 +11,6 @@ from beat_sabre_map_manager.data.maps import Maps
 from beat_sabre_map_manager.data.bspath import BSPath
 from beat_sabre_map_manager.ui.status import StatusUI
 
-# TODO: add name and song name split - middle
 
 class App:
     def __init__(self, page: ft.Page) -> None:
@@ -36,7 +35,7 @@ class App:
         self.ui_map_detail = MapDetailUI(status_handle, self.reload_maps)
         self.ui_bottom_actions = BottomActionsUI(game_path, status_handle, self.reload_maps)
         self.ui_top_actions = TopActionsUI(self.reload_maps)
-        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
+        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail, "interpret_asc")
 
         # main containers
         self.map_list_container = ft.Container(
@@ -65,6 +64,8 @@ class App:
         "interpret_asc", "interpret_desc", "song_asc", "song_desc"
     ] = "interpret_asc") -> None:
         self.maps_handle.reload_maps()
+        self.ui_map_list.sorting = sorting
+
         match sorting:
             case "interpret_desc":
                 self.maps_handle.sort_maps_interpret_asc(reverse=True)
@@ -75,7 +76,7 @@ class App:
             case _: 
                 self.maps_handle.sort_maps_interpret_asc()
 
-        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail)
+        self.ui_map_list = MapListUI(self.maps_handle.maps, self.ui_map_detail, sorting)
         self.map_list_container.content = self.ui_map_list.content
 
         self.page.update()

@@ -9,6 +9,7 @@ def set_config(page: ft.Page) -> None:
     page.window.resizable = False
     page.window.height = 1024
     page.window.width = 640
+    page.window.maximizable = False
     page.window.center()
 
     page.theme = ft.Theme(
