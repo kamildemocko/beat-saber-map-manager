@@ -10,7 +10,8 @@ A comprehensive tool to manage and organize your Beat Saber custom maps.
 - Sorting and filtering capabilities
 
 ## Screenshot
-TODO
+![image](https://github.com/user-attachments/assets/ea7003ed-5418-4cf8-a5c4-702393fa4b26)
+
 
 ## Installation from source
 ```cmd
