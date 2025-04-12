@@ -8,6 +8,11 @@ A comprehensive tool to manage and organize your Beat Saber custom maps.
 - Easily install maps
 - Sort maps by interpret or song name
 
+## Requirements
+- Windows OS
+- Beat Saber installed via Steam
+- Supports Beat Saber maps versions 2^
+
 ## Screenshot
 ![image](https://github.com/user-attachments/assets/ea7003ed-5418-4cf8-a5c4-702393fa4b26)
 
