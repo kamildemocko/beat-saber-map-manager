@@ -1,7 +1,7 @@
 import flet as ft
 import importlib.metadata
 
-VERSION = importlib.metadata.version("beat_sabre_map_manager")
+VERSION = importlib.metadata.version("beat_saber_map_manager")
 
 class StatusUI:
     def __init__(self, page: ft.Page) -> None:

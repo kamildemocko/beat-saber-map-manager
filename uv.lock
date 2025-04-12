@@ -47,8 +47,8 @@ wheels = [
 ]
 
 [[package]]
-name = "beat-sabre-map-manager"
-version = "1.0.0"
+name = "beat-saber-map-manager"
+version = "1.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "flet", extra = ["all"] },

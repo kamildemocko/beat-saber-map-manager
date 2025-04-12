@@ -5,10 +5,10 @@ import shutil
 
 import flet as ft
 
-from beat_sabre_map_manager.data.map_detail import MapDetail, get_base64_img, open_audio_file
-from beat_sabre_map_manager.data.maps import BSMap
-from beat_sabre_map_manager.ui.status import StatusUI
-from beat_sabre_map_manager.error_handling import with_snackbar_err_popup
+from beat_saber_map_manager.data.map_detail import MapDetail, get_base64_img, open_audio_file
+from beat_saber_map_manager.data.maps import BSMap
+from beat_saber_map_manager.ui.status import StatusUI
+from beat_saber_map_manager.error_handling import with_snackbar_err_popup
 
 
 class MapDetailUI:

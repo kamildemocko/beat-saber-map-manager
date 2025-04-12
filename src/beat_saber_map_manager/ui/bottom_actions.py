@@ -5,11 +5,11 @@ from pathlib import Path
 import flet as ft
 import importlib.metadata
 
-from beat_sabre_map_manager.data.new_map import add_new_map
-from beat_sabre_map_manager.ui.status import StatusUI
-from beat_sabre_map_manager.error_handling import with_snackbar_err_popup
+from beat_saber_map_manager.data.new_map import add_new_map
+from beat_saber_map_manager.ui.status import StatusUI
+from beat_saber_map_manager.error_handling import with_snackbar_err_popup
 
-VERSION = importlib.metadata.version("beat_sabre_map_manager")
+VERSION = importlib.metadata.version("beat_saber_map_manager")
 
 class BottomActionsUI:
     def __init__(

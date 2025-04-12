@@ -3,9 +3,9 @@ from itertools import batched
 
 import flet as ft
 
-from beat_sabre_map_manager.data.map_detail import Difficulty
-from beat_sabre_map_manager.data.maps import BSMap
-from beat_sabre_map_manager.ui.map_detail import MapDetailUI
+from beat_saber_map_manager.data.map_detail import Difficulty
+from beat_saber_map_manager.data.maps import BSMap
+from beat_saber_map_manager.ui.map_detail import MapDetailUI
 
 
 class MapListUI:

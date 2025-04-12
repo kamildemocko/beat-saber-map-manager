@@ -1,11 +1,11 @@
 from loguru import logger
 import flet as ft
 
-from beat_sabre_map_manager.app import App
+from beat_saber_map_manager.app import App
 
 
 def set_config(page: ft.Page) -> None:
-    page.title = "Beat Sabre Map Manager"
+    page.title = "Beat Saber Map Manager"
     page.window.resizable = False
     page.window.height = 1024
     page.window.width = 640
