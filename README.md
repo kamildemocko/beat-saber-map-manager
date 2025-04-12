@@ -14,8 +14,7 @@ A comprehensive tool to manage and organize your Beat Saber custom maps.
 - Supports Beat Saber maps versions 2^
 
 ## Screenshot
-![image](https://github.com/user-attachments/assets/ea7003ed-5418-4cf8-a5c4-702393fa4b26)
-
+![image](https://github.com/user-attachments/assets/b6799960-94a8-404c-82a3-f65c3be31e96)
 
 ## Install with installer
 Download and run the installer from the [latest release](https://github.com/kamildemocko/beat-saber-map-manager/releases/latest) page.
