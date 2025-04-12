@@ -91,6 +91,8 @@ def get_map_detail(map_path: Path) -> tuple[MapDetail, str]:
             parsed = MapDetail.model_validate_json(file.read())
             parsed.song_filename = map_path.joinpath(parsed.song_filename).as_posix()
             parsed.cover_image_filename = map_path.joinpath(parsed.cover_image_filename).as_posix()
+            parsed.song_name = parsed.song_name.strip().title()
+            parsed.song_author_name = parsed.song_author_name.strip().title()
 
             return parsed, ""
 
