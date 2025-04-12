@@ -1,6 +1,7 @@
 .vscode
 .venv
 **/__pycache__
-dist
-build
-main.spec
+dist/
+build/
+*.spec
+Output/
