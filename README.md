@@ -11,14 +11,17 @@ A comprehensive tool to manage and organize your Beat Saber custom maps.
 ## Screenshot
 ![image](https://github.com/user-attachments/assets/ea7003ed-5418-4cf8-a5c4-702393fa4b26)
 
-## Prerequisities
-`uv`
-- package manager
 
 ## Install with installer
 Download and run the installer from the [latest release](https://github.com/kamildemocko/beat-saber-map-manager/releases/latest) page.
 
 ## Installation from source
+
+### Prerequisities
+`uv`
+- package manager
+
+### Install
 ```cmd
 git clone https://github.com/kamildemocko/beat-saber-map-manager.git
 cd beat-sabre-map-manager
