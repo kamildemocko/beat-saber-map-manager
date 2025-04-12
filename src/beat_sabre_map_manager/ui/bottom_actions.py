@@ -42,8 +42,8 @@ class BottomActionsUI:
                     style=ft.ButtonStyle(
                         padding=ft.padding.all(16),
                         bgcolor={
-                            ft.ControlState.DEFAULT: ft.Colors.SECONDARY,
-                            ft.ControlState.HOVERED: ft.Colors.PRIMARY,
+                            ft.ControlState.DEFAULT: ft.Colors.PRIMARY,
+                            ft.ControlState.HOVERED: ft.Colors.TERTIARY,
                         },
                     ),
                     on_click=self.err_decor(self._handle_add_new_map),

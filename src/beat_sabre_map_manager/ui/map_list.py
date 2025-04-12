@@ -42,7 +42,6 @@ class MapListUI:
             case 2 | 3:
                 tail = "\n".join([d.name for d in lst])
             case 4 | 6:
-                print("case 2")
                 btch = batched([d.name for d in lst], 2)
                 tail = "\n".join([", ".join(d) for d in btch])
             case _:

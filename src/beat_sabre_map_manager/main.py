@@ -16,6 +16,7 @@ def set_config(page: ft.Page) -> None:
         color_scheme=ft.ColorScheme(
             primary=ft.Colors.AMBER,
             secondary=ft.Colors.AMBER_200,
+            tertiary=ft.Colors.AMBER_ACCENT_700,
             error=ft.Colors.RED,
         )
     )
