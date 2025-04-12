@@ -1,6 +1,6 @@
 [Setup]
 AppName=Beat Saber Map Manager
-AppVersion=1.0.0
+AppVersion=1.1.1
 DefaultDirName={userappdata}\Beat Saber Map Manager
 DefaultGroupName=Beat Saber Map Manager
 DisableDirPage=yes
