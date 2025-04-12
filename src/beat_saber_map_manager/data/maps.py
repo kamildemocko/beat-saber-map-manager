@@ -4,7 +4,7 @@ import re
 
 from loguru import logger
 
-from beat_sabre_map_manager.data.map_detail import get_map_detail, MapDetail
+from beat_saber_map_manager.data.map_detail import get_map_detail, MapDetail
 
 @dataclass
 class BSMap:

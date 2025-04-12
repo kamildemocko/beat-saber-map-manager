@@ -29,18 +29,18 @@ Download and run the installer from the [latest release](https://github.com/kami
 ### Install
 ```cmd
 git clone https://github.com/kamildemocko/beat-saber-map-manager.git
-cd beat-sabre-map-manager
+cd beat-saber-map-manager
 uv sync
 ```
 
 ## Running from source
 ```cmd
-uv run python .\src\beat_sabre_map_manager\main.py
+uv run python .\src\beat_saber_map_manager\main.py
 ```
 
 ## Packaging
 ```cmd
-flet pack .\src\beat_sabre_map_manager\main.py --icon assets\icon.ico --pyinstaller-build-args --onedir --name "Beat Sabre Map Manager"
+flet pack .\src\beat_saber_map_manager\main.py --icon assets\icon.ico --pyinstaller-build-args --onedir --name "Beat Saber Map Manager"
 ```
 
 ## Licence

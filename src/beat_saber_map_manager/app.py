@@ -3,13 +3,13 @@ from typing import Literal
 import flet as ft
 from loguru import logger
 
-from beat_sabre_map_manager.ui.map_list import MapListUI
-from beat_sabre_map_manager.ui.map_detail import MapDetailUI
-from beat_sabre_map_manager.ui.bottom_actions import BottomActionsUI
-from beat_sabre_map_manager.ui.top_actions import TopActionsUI
-from beat_sabre_map_manager.data.maps import Maps
-from beat_sabre_map_manager.data.bspath import BSPath
-from beat_sabre_map_manager.ui.status import StatusUI
+from beat_saber_map_manager.ui.map_list import MapListUI
+from beat_saber_map_manager.ui.map_detail import MapDetailUI
+from beat_saber_map_manager.ui.bottom_actions import BottomActionsUI
+from beat_saber_map_manager.ui.top_actions import TopActionsUI
+from beat_saber_map_manager.data.maps import Maps
+from beat_saber_map_manager.data.bspath import BSPath
+from beat_saber_map_manager.ui.status import StatusUI
 
 
 class App:
