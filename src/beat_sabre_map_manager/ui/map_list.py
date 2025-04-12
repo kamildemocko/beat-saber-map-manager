@@ -1,7 +1,9 @@
 from typing import cast
+from itertools import batched
 
 import flet as ft
 
+from beat_sabre_map_manager.data.map_detail import Difficulty
 from beat_sabre_map_manager.data.maps import BSMap
 from beat_sabre_map_manager.ui.map_detail import MapDetailUI
 
@@ -19,19 +21,36 @@ class MapListUI:
         self.content = ft.ListView(expand=1)
 
         for bsmap in self.bsmaps:
-            tail = "⬩".join([d.name for d in bsmap.detail.difficulties])
+            tail = self._make_tile_tail(bsmap.detail.difficulties)
 
             self.content.controls.append(ft.ListTile(
                 title=ft.Text(bsmap.detail.song_name),
                 subtitle=ft.Text(bsmap.detail.song_author_name),
                 on_click=self._on_list_tile_click,
                 leading=ft.Icon(ft.Icons.MULTITRACK_AUDIO),
-                trailing=ft.Text(tail),
+                trailing=ft.Text(tail, text_align=ft.TextAlign.END),
                 data=bsmap,
             ))
         
         self._handle_ui_select(cast(list[ft.ListTile], self.content.controls)[0])
     
+    @staticmethod
+    def _make_tile_tail(lst: list[Difficulty]) -> str:
+        match len(lst):
+            case 1:
+                tail = lst[0].name
+            case 2 | 3:
+                tail = "\n".join([d.name for d in lst])
+            case 4 | 6:
+                print("case 2")
+                btch = batched([d.name for d in lst], 2)
+                tail = "\n".join([", ".join(d) for d in btch])
+            case _:
+                btch = batched([d.name for d in lst], 3)
+                tail = "\n".join([", ".join(d) for d in btch])
+        
+        return tail
+
     def _handle_ui_select(self, selected_tile: ft.ListTile) -> None:
         if self.content is None:
             return
