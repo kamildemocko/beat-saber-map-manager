@@ -12,6 +12,11 @@ from beat_saber_map_manager.error_handling import with_snackbar_err_popup
 VERSION = importlib.metadata.version("beat_saber_map_manager")
 
 class BottomActionsUI:
+    """
+    UI component for the bottom actions of the Beat Saber Map Manager.
+    This component provides buttons for installing maps, opening BeatSaver,
+    and opening BeatMapper.
+    """
     def __init__(
         self, 
         game_path: Path,
@@ -102,10 +107,12 @@ class BottomActionsUI:
         )
 
     def _handle_get_maps(self) -> None:
+        """Handle click event on the 'Get maps' button."""
         self.status_handle.pop("Opening www.beatsaber.com")
         os.system('start "" https://beatsaver.com')
 
     def _handle_crate_maps(self) -> None:
+        """Handle click event on the 'Create maps' button."""
         self.status_handle.pop("Opening www.beatmapper.app")
         os.system('start "" https://beatmapper.app')
     

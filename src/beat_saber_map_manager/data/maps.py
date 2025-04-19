@@ -8,6 +8,7 @@ from beat_saber_map_manager.data.map_detail import get_map_detail, MapDetail
 
 @dataclass
 class BSMap:
+    """Class representing a Beat Saber map."""
     filename: str
     name: str
     path: Path
@@ -22,6 +23,18 @@ class Maps:
     
     @staticmethod
     def _get_name_if_valid(name: str) -> str | None:
+        """
+        Get the name of the map if it is valid. A valid name is one that
+        starts with 1-6 alphanumeric characters followed by a space and
+        a set of parentheses. The contents of the parentheses are returned.
+        If the name is not valid, None is returned.
+
+        Args:
+            name (str): The name of the map.
+
+        Returns:
+            str | None: Output or none if invalid.
+        """
         match = re.search(r"^\w{1,6}\s{1}\((.*)\)$", name)
         return None if match is None else match.group(1)
     
@@ -30,6 +43,11 @@ class Maps:
         self.load_maps()
     
     def load_maps(self) -> None:
+        """
+        Load all maps from the game path. The maps are loaded from the
+        Beat Saber game directory. The maps are loaded into a list of
+        BSMap objects. The maps are sorted by name.
+        """
         logger.info("Loading maps..")
 
         for mapdir in self.game_path.glob("*"):
@@ -58,7 +76,15 @@ class Maps:
             )
     
     def sort_maps_interpret_asc(self, reverse: bool = False) -> None:
+        """
+        Sort the maps by the song author name. The maps are sorted in
+        ascending order by default.
+        """
         self.maps = sorted(self.maps, key=lambda x: x.detail.song_author_name, reverse=reverse)
 
     def sort_maps_song_asc(self, reverse: bool = False) -> None:
+        """
+        Sort the maps by the song title name. The maps are sorted in
+        ascending order by default.
+        """
         self.maps = sorted(self.maps, key=lambda x: x.detail.song_name, reverse=reverse)

@@ -9,6 +9,12 @@ from beat_saber_map_manager.ui.map_detail import MapDetailUI
 
 
 class MapListUI:
+    """
+    Map list UI for the Beat Saber Map Manager.
+    This class is responsible for creating the map list UI
+    for the Beat Saber Map Manager. It includes a list of maps
+    and a detail view for the selected map.
+    """
     def __init__(self, bsmaps: list[BSMap], detail_handle: MapDetailUI) -> None:
         self.content: ft.ListView | None = None
         self.bsmaps = bsmaps
@@ -36,6 +42,15 @@ class MapListUI:
     
     @staticmethod
     def _make_tile_tail(lst: list[Difficulty]) -> str:
+        """
+        Adds the difficulties to the tile tail.
+
+        Args:
+            lst (list[Difficulty]): The list of difficulties.
+
+        Returns:
+            str: The formatted string for the tile tail.
+        """
         match len(lst):
             case 1:
                 tail = lst[0].name
@@ -51,6 +66,13 @@ class MapListUI:
         return tail
 
     def _handle_ui_select(self, selected_tile: ft.ListTile) -> None:
+        """
+        handles the visual state of the list tiles when one is selected
+        and updates the detail view with the selected map data.
+
+        Args:
+            selected_tile (ft.ListTile): The selected list tile.
+        """
         if self.content is None:
             return
 
@@ -70,7 +92,8 @@ class MapListUI:
         self.detail_handle.build_content(map_data)
 
     def _on_list_tile_click(self, e: ft.ControlEvent) -> None:
-        """handle click event on a list tile in the map list, updates visual state of tiles and trings detail view
+        """
+        handle click event on a list tile in the map list, updates visual state of tiles and trings detail view
         Args:
             e (ft.ControlEvent): The click event containing the control that was clicked.
         """

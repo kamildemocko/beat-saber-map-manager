@@ -4,6 +4,12 @@ import flet as ft
 
 
 class TopActionsUI:
+    """
+    Top actions UI for the Beat Saber Map Manager.
+    This class is responsible for creating the top actions UI
+    for the Beat Saber Map Manager. It includes a segmented button
+    for sorting the maps by different criteria.
+    """
     def __init__(
         self, 
         map_reload_callback: Callable

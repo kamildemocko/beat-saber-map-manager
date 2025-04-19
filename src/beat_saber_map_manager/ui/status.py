@@ -4,6 +4,7 @@ import importlib.metadata
 VERSION = importlib.metadata.version("beat_saber_map_manager")
 
 class StatusUI:
+    """A class to manage the status UI of the application."""
     def __init__(self, page: ft.Page) -> None:
         self.page = page
 

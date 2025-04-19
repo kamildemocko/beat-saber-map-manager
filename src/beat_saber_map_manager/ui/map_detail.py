@@ -12,6 +12,13 @@ from beat_saber_map_manager.error_handling import with_snackbar_err_popup
 
 
 class MapDetailUI:
+    """
+    UI component for displaying map details.
+    This class is responsible for creating the UI for the map details,
+    including the cover image, song name, author names, and action buttons.
+    It also handles the actions for opening the audio file, opening the map folder,
+    opening the map on beatsaver.com, searching YouTube, and deleting the map.
+    """
     def __init__(
         self, 
         status_handle: StatusUI, 
@@ -121,22 +128,52 @@ class MapDetailUI:
         self.build_content(None)
     
     def _handle_open_audio(self, map_detail: MapDetail) -> None:
+        """
+        Open the audio file in the default music player.
+
+        Args:
+            map_detail (MapDetail): Map detail object containing the song filename.
+        """
         open_audio_file(map_detail.song_filename)
         self.status_handle.pop(f"Opened audio file {map_detail.song_name} in default music player")
 
     def _handle_open_beatsaver(self, bsmap: BSMap) -> None:
+        """
+        Open the map on beatsaver.com.
+
+        Args:
+            bsmap (BSMap): Map to open.
+        """
         self.status_handle.pop(f"Open map on www.beatsaver.com with id: {bsmap.uid}")
         os.system(f'start "" https://beatsaver.com/maps/{bsmap.uid}')
 
     def _handle_search_youtube(self, bsmap: BSMap) -> None:
+        """
+        Search YouTube for the map.
+
+        Args:
+            bsmap (BSMap): Map to search for.
+        """
         self.status_handle.pop(f"Search YouTube for map {bsmap.title}")
         os.system(f'start "" https://www.youtube.com/results?search_query={urllib.parse.quote_plus(bsmap.title)}')
 
     def _handle_open_folder(self, bsmap: BSMap) -> None:
+        """
+        Open map folder in file explorer.
+
+        Args:
+            bsmap (BSMap): Map to open.
+        """
         self.status_handle.pop(f"Opening map folder {bsmap.name}")
         os.system(f'start explorer.exe {bsmap.path}')
 
     def _handle_delete_map(self, bsmap: BSMap) -> None:
+        """
+        Delete map from disk and remove it from the list of maps.
+
+        Args:
+            bsmap (BSMap): Map to delete.
+        """
         shutil.rmtree(bsmap.path)
         self.status_handle.pop(f"Removed map {bsmap.title}")
         self.map_reload_callback()

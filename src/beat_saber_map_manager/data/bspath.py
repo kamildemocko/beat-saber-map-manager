@@ -6,6 +6,10 @@ from loguru import logger
 
 
 class BSPath:
+    """
+    class that finds the game path for Beat Saber
+    it checks both Steam and Oculus paths
+    """
     def __init__(self):
         self.path: Path | None = None
     

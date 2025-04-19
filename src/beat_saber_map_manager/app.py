@@ -63,6 +63,11 @@ class App:
     def reload_maps(self, sorting: Literal[
         "interpret_asc", "interpret_desc", "song_asc", "song_desc"
     ] = "interpret_asc") -> None:
+        """handles reloading of list with sorting, along with updating UI
+
+        Args:
+            sorting (Literal[interpret_asc,interpret_desc, song_asc, song_desc], optional): sorting type. Defaults to "interpret_asc".
+        """
         self.maps_handle.reload_maps()
 
         match sorting:
@@ -81,6 +86,12 @@ class App:
         self.page.update()
 
     def build_ui(self, page: ft.Page) -> None:
+        """Builds the UI for the app.
+        This includes error handling and main UI components.
+
+        Args:
+            page (ft.Page): a Flet page object.
+        """
         if self.error != "":
             page.add(
                 ft.Row([
