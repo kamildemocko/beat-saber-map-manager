@@ -38,7 +38,21 @@ class MapListUI:
                 data=bsmap,
             ))
         
-        self._handle_ui_select(cast(list[ft.ListTile], self.content.controls)[0])
+        if self.content.controls:
+            self._handle_ui_select(cast(list[ft.ListTile], self.content.controls)[0])
+        else:
+            self.content.controls.append(
+                ft.Container(
+                    content=ft.Column([
+                        ft.Icon(ft.Icons.LIBRARY_MUSIC_OUTLINED, size=50, color=ft.colors.GREY_400),
+                        ft.Text("No maps found", size=20, color=ft.colors.GREY_400),
+                        ft.Text("Install maps using the button below", size=16, color=ft.colors.GREY_400)
+                    ], 
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                    margin=ft.margin.only(top=100)
+                )
+            )
     
     @staticmethod
     def _make_tile_tail(lst: list[Difficulty]) -> str:
